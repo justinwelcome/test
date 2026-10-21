@@ -168,19 +168,27 @@ def frame(i):
                         al = int(230 * (1 - (i - t) / TRAIL))
                         cv2.line(ov, tuple(map(int, a)), tuple(map(int, b)), side_col(c, s) + (al,), int(5 * U),
                                  cv2.LINE_AA)
+    im.alpha_composite(Image.fromarray(ov, 'RGBA'))
+    # Skeleton on its own layer so `skeleton_opacity` can fade it as a whole (outline and colour together).
+    sk = np.zeros((H, W, 4), np.uint8)
+    for k in range(K):
+        c = COL[k]
         for a, b, s in LIMBS:
             pa, pb = pt(k, i, a), pt(k, i, b)
             if pa and pb:
-                cv2.line(ov, tuple(map(int, pa)), tuple(map(int, pb)), (0, 0, 0, 140), int(9 * U), cv2.LINE_AA)
-                cv2.line(ov, tuple(map(int, pa)), tuple(map(int, pb)), side_col(c, s) + (255,), int(5 * U),
+                cv2.line(sk, tuple(map(int, pa)), tuple(map(int, pb)), (0, 0, 0, 140), int(9 * U), cv2.LINE_AA)
+                cv2.line(sk, tuple(map(int, pa)), tuple(map(int, pb)), side_col(c, s) + (255,), int(5 * U),
                          cv2.LINE_AA)
         for j in range(5, 17):
             p = pt(k, i, j)
             if p:
-                cv2.circle(ov, tuple(map(int, p)), int(7 * U), (0, 0, 0, 160), -1, cv2.LINE_AA)
-                cv2.circle(ov, tuple(map(int, p)), int(5 * U), side_col(c, 'L' if j % 2 else 'R') + (255,), -1,
+                cv2.circle(sk, tuple(map(int, p)), int(7 * U), (0, 0, 0, 160), -1, cv2.LINE_AA)
+                cv2.circle(sk, tuple(map(int, p)), int(5 * U), side_col(c, 'L' if j % 2 else 'R') + (255,), -1,
                            cv2.LINE_AA)
-    im.alpha_composite(Image.fromarray(ov, 'RGBA'))
+    op = float(cfg.get('skeleton_opacity', 1.0))
+    if op < 1:
+        sk[..., 3] = (sk[..., 3] * op).astype(np.uint8)
+    im.alpha_composite(Image.fromarray(sk, 'RGBA'))
     dr = ImageDraw.Draw(im)
     for k in range(K):
         c = COL[k]

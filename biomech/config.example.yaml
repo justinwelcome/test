@@ -44,6 +44,9 @@ slowmo: [0.5, 0.25]
 #   csv           - per-frame joint positions and metrics
 outputs: [annotated, slowmo, sdr, side_by_side, frame_step, csv]
 
+# Opacity of the skeleton lines and joint dots (1 = solid, 0.6 = 40% transparent).
+skeleton_opacity: 1.0
+
 # Text added under the graph strip. null = default note.
 note: null
 
