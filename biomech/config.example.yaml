@@ -1,0 +1,56 @@
+# Biomechanics overlay settings. Copy this file, edit it, and pass it with --config.
+# Anything you leave out falls back to the defaults shown here.
+
+# Who to track. One entry per person (1-4 people).
+# `looks_like` is a plain description used to pick the right person in the frame.
+# `anchor` is filled in after running `pipeline.py identify`: the frame number and
+# the #number of the person in identify.jpg. Leave it out until then.
+people:
+  - name: Brown top
+    looks_like: brown long-sleeve top, black wide trousers, white sneakers
+    colour: cyan
+    # anchor: {frame: 0, index: 1}
+  - name: Jeans
+    looks_like: black top, blue jeans, silver heels
+    colour: magenta
+    # anchor: {frame: 0, index: 0}
+
+# Part of the clip to process, in seconds (null = start / end of the video).
+trim:
+  start: null
+  end: null
+
+# Joint-angle labels drawn next to the joints.
+# Choose from: knee, hip, elbow, trunk_lean
+labels: [knee]
+
+# Metric plotted in the graph strip (one panel per person). Same choices as labels, or none.
+graph: knee
+graph_position: top          # top | bottom | none  (bottom covers the feet in full-body shots)
+
+# Motion trails. Choose from: ankles, wrists, hips. Empty list = no trails.
+trails: [ankles]
+trail_seconds: 0.4
+
+# Slow-motion speeds. Real frames only, no interpolated frames.
+slowmo: [0.5, 0.25]
+
+# Files to produce. Choose from:
+#   annotated     - full-resolution annotated video in the source format (HDR stays HDR)
+#   slowmo        - annotated video retimed to each speed in `slowmo` (no re-encode)
+#   sdr           - full-resolution annotated video in standard SDR (plays everywhere)
+#   side_by_side  - clean | annotated, SDR
+#   frame_step    - 1080p SDR where every frame is a keyframe (exact frame stepping)
+#   csv           - per-frame joint positions and metrics
+outputs: [annotated, slowmo, sdr, side_by_side, frame_step, csv]
+
+# Text added under the graph strip. null = default note.
+note: null
+
+# --- advanced ---
+quality_crf: 16              # lower = higher quality, bigger files (14-18 is visually lossless)
+detect_size: 640             # keep at 640: larger values cut off people who fill the frame
+min_person_height: 0.25      # ignore detected people shorter than this fraction of frame height
+keypoint_confidence: 0.35    # keypoints below this are treated as missing
+smoothing_frames: 9          # Savitzky-Golay window; 0 disables smoothing
+max_gap_frames: 6            # fill tracking gaps up to this length; longer gaps fade out
