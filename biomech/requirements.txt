@@ -3,3 +3,5 @@ scipy
 pyyaml
 pillow
 opencv-python-headless
+librosa
+matplotlib
