@@ -1,0 +1,56 @@
+{
+  "names": ["Justin", "Angi"],
+  "accent": [92, 225, 230],
+  "keep_bottom": 3600,
+  "cover": {
+    "frame": 120,
+    "kicker": "URBAN KIZ  ·  TECHNIQUE",
+    "title": "How to get the Urban Kiz glide",
+    "subtitle": "4 moments  ·  4 cues to practise",
+    "credit": "with Justin & Angi"
+  },
+  "moments": [
+    {
+      "frame": 30, "tag": "The walk", "headline": "Soft knees, level head",
+      "callouts": [
+        {"label": "Head travels level", "side": "R", "y": 300, "targets": ["Justin.head_top"]},
+        {"label": "Slight bend, even in heels", "side": "L", "y": 640, "targets": ["Angi.r_knee"]},
+        {"label": "Knee stays soft, never locks", "side": "R", "y": 1000, "targets": ["Justin.r_knee"]}
+      ],
+      "try": "Walk with a book on your head. If it wobbles, soften your knees and move from the hips."
+    },
+    {
+      "frame": 120, "tag": "The pause", "headline": "Stop together",
+      "callouts": [
+        {"label": "Chests stay connected", "side": "R", "y": 420, "targets": ["between:Justin.chest|Angi.chest"]},
+        {"label": "Both settle together", "side": "L", "y": 900, "targets": ["Angi.feet", "Justin.feet"]}
+      ],
+      "try": "Leaders: stop by breathing in through the chest, not by braking with the feet."
+    },
+    {
+      "frame": 192, "tag": "Travelling", "headline": "The lead starts in the chest",
+      "callouts": [
+        {"label": "The lead starts here", "side": "R", "y": 470, "targets": [{"at": "Justin.chest", "dx": 115, "dy": 155}]},
+        {"label": "Her step answers ~0.1 s later", "side": "L", "y": 760, "targets": [[703, 3150]]}
+      ],
+      "try": "Hold a scarf between your chests and travel 8 steps. If it drops, the connection opened."
+    },
+    {
+      "frame": 258, "tag": "The turn", "headline": "One shared axis",
+      "axis": {"x": "between:Justin.hip_mid|Angi.hip_mid", "top": 650, "bottom": 3330},
+      "callouts": [
+        {"label": "Turn around one pole", "side": "L", "y": 470, "targets": [{"at": "between:Justin.hip_mid|Angi.hip_mid", "dy": -400}]},
+        {"label": "Calm, quiet shoulders", "side": "R", "y": 360, "targets": ["Justin.shoulders"]}
+      ],
+      "try": "Turn slowly in place, imagining a single pole between your two bodies."
+    }
+  ],
+  "closing": {
+    "kicker": "TIMING",
+    "title": "Feel the half-beat",
+    "body": "This track runs at about 123 BPM, and their steps land on the half-beats. Start with one step per beat. Double it only when it feels effortless.",
+    "cues": ["Soft knees, level head", "Stop together", "Lead from the chest", "One shared axis"],
+    "bonus": "Film yourself from the side, phone on a tripod. The camera shows what the mirror hides.",
+    "button": "Save this for your next practice"
+  }
+}

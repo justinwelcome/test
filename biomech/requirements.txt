@@ -1,0 +1,7 @@
+ultralytics>=8.3
+scipy
+pyyaml
+pillow
+opencv-python-headless
+librosa
+matplotlib
