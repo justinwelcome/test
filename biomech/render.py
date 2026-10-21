@@ -224,5 +224,11 @@ if A.png:
 else:
     import sys
     out = sys.stdout.buffer
-    for i in range(N):
-        out.write(frame(i).tobytes())
+    try:
+        for i in range(N):
+            out.write(frame(i).tobytes())
+    except BrokenPipeError:
+        # ffmpeg stops reading once the source ends. The proxy can hold a few more frames than the source
+        # (constant-rate conversion repeats frames), so this is a normal end, not a failure.
+        sys.stderr.write(f'render.py: consumer closed after frame {i} of {N}\n')
+        os.dup2(os.open(os.devnull, os.O_WRONLY), sys.stdout.fileno())
